@@ -19,7 +19,7 @@ class PetrolCar extends Car {}
 class HybridCar extends Car {}
 
 class BYD extends ElectroCar {}
-class Spark extends PetrolCar {}
+class Kia extends PetrolCar {}
 class Zeekr extends HybridCar {}
 
 interface Capacity {
@@ -53,7 +53,7 @@ class Parking<T extends Car> {
 	enterCar(car: T) {
 		if (this.cars.length < this.capacity.electroCar) {
 			this.cars.push(car);
-			console.log(`${car.nameCar} entered the parking.`);
+			console.log(`${car.nameCar} to'xtash joyiga kirdi.`);
 		} else {
 			console.log(`${this.nameParking} is full by => ${car.constructor.name}s.`);
 		}
@@ -63,7 +63,7 @@ class Parking<T extends Car> {
 		const index = this.cars.indexOf(car);
 		if (index !== -1) {
 			this.cars.splice(index, 1);
-			console.log(`${car.nameCar} logged out from the parking.`);
+			console.log(`${car.nameCar}to'xtash joyidan chiqdi.`);
 		}
 	}
 
@@ -72,21 +72,24 @@ class Parking<T extends Car> {
 		// return this.calculateMinutes() * pricePerMinute;
 	}
 
+	calculateMinutes() {}
+
 	calculateTotalProfit() {}
 
-	calculateMinutes() {}
 }
 
-const parking1 = new Parking<ElectroCar>("Sebzor", capacityParking, pricingParking);
+const parking1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
 const parking2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
-const parking3 = new Parking<HybridCar>("Chilonzor", capacityParking, pricingParking);
+const parking3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
 console.log(parking1);
 console.log(parking2);
 console.log(parking3);
 
-const car1 = new BYD("BYD", 4, "blue", "40000$");
-const car2 = new Spark("Spark", 4, "green", "25000$");
-const car3 = new Zeekr("Zeekr", 4, "black", "35000$");
+console.log("-----------------------MOSHINA-----------------------------------------");
+
+const car1 = new BYD("BYD", 4, "blue", "4$");
+const car2 = new Kia("Kia", 4, "green", "2$");
+const car3 = new Zeekr("Zeekr", 4, "black", "3$");
 
 
 console.log(car1);
@@ -104,6 +107,9 @@ console.log("-----------------------MOSHINANI ketishi---------------------------
 parking1.logoutCar(car1);
 parking2.logoutCar(car2);
 parking3.logoutCar(car3);
+
+
+
 
 // console.log(`Total profit: $${parking.calculateTotalProfit()}`);
 // // props:   (public)name, (public)sigimi, (public)narxlar
