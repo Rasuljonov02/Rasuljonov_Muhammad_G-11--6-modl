@@ -82,40 +82,43 @@ class Parking<T extends Car> {
 	}
 }
 
-const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking.electroCarDaqiqadaNarx);
-const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking.petrolCarDaqiqadaNarx);
-const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking.hybridCarDaqiqadaNarx);
+
+const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
+const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
+const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
+console.log("Rasuljonov Muhammad");
+
 
 const car1 = new BYD("BYD");
 const car2 = new Kia("Kia");
 const car3 = new BMW("BMW");
 
-console.log("-----------------------MOSHINA KIRISH-----------------------------------------");
+console.log("----MOSHINA KIRISH----");
 
 turarjoy1.kirish(car1);
 turarjoy2.kirish(car2);
 turarjoy3.kirish(car3);
 
-console.log("-----------------------MOSHINANI ketishi-----------------------------------------");
+console.log("----MOSHINANI ketishi----");
 
 turarjoy1.chiqish(car1);
 turarjoy2.chiqish(car2);
 turarjoy3.chiqish(car3);
 
-console.log("-----------------------VAQT HISOBASH-----------------------------------------");
+console.log("----VAQT HISOBASH----");
 
 const minutes = turarjoy1.daqiqalarniHisoblash();
 const daqiqadaNarx = pricingParking.electroCarDaqiqadaNarx;
 const umumiyNarx = minutes * daqiqadaNarx;
 
-console.log("-----------------------1-moshina-----------------------------------------");
+console.log("----1-moshina----");
 console.log(BYD.name);
 
 console.log(`Time: ${minutes} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx}$`);
 console.log(`Umumiy narx: ${umumiyNarx}$`);
 
-console.log("-----------------------2-moshina-----------------------------------------");
+console.log("----2-moshina----");
 console.log(Kia.name);
 
 const minutes1 = turarjoy2.daqiqalarniHisoblash();
@@ -126,7 +129,7 @@ console.log(`Time: ${minutes1} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx1}$`);
 console.log(`Umumiy narx: ${umumiyNarx1}$`);
 
-console.log("-----------------------3-moshina-----------------------------------------");
+console.log("----3-moshina----");
 console.log(BMW.name);
 
 const minutes2 = turarjoy3.daqiqalarniHisoblash();
@@ -136,3 +139,4 @@ const umumiyNarx2 = minutes2 * daqiqadaNarx2;
 console.log(`Time: ${minutes2} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx2}$`);
 console.log(`Umumiy narx: ${umumiyNarx2}$`);
+
