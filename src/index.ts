@@ -1,112 +1,111 @@
-import "./a";
+
+
+
 class Car {
-	constructor(public name: string) {}
+	constructor(
+		public nameCar: string,
+		public tire: 4, // mashina baloni
+		public color: string,
+		public priceCar: string
+	) {}
+
+	run() {
+		console.log(`${this.nameCar} is running...`);
+	}
 }
 
 class ElectroCar extends Car {}
 class PetrolCar extends Car {}
 class HybridCar extends Car {}
 
+class BYD extends ElectroCar {}
+class Spark extends PetrolCar {}
+class Zeekr extends HybridCar {}
+
 interface Capacity {
 	electroCar: number;
 	petrolCar: number;
-	HybridCar: number;
+	hybridCar: number;
 }
 
 interface Pricing {
 	electroCarPricePerMinute: number;
 	petrolCarPricePerMinute: number;
-	HybridCarPricePerMinute: number;
+	hybridCarPricePerMinute: number;
 }
+
+const capacityParking: Capacity = {
+	electroCar: 4,
+	petrolCar: 12,
+	hybridCar: 3,
+};
+
+const pricingParking: Pricing = {
+	electroCarPricePerMinute: 10,
+	petrolCarPricePerMinute: 4,
+	hybridCarPricePerMinute: 20,
+};
 
 class Parking<T extends Car> {
 	public cars: T[] = [];
-	public capacity: Capacity = {} as Capacity;
-	public pricing: Pricing = {} as Pricing;
+	constructor(public nameParking: string, public capacity: Capacity, public pricing: Pricing) {}
 
-	constructor(public name: string, capacity: Capacity, pricing: Pricing) {
-		console.log((this.capacity = capacity));
-		console.log((this.pricing = pricing));
-
-		this.capacity = capacity;
-		this.pricing = pricing;
-	}
-
-	enterCar(car: T): { minutes: number } {
-		const carType = this.getCarType(car);
-		if (this.canParkCar(carType)) {
+	enterCar(car: T) {
+		if (this.cars.length < this.capacity.electroCar) {
 			this.cars.push(car);
-			return { minutes: 10 }; // necha minut turishi
+			console.log(`${car.nameCar} entered the parking.`);
 		} else {
-			console.log(` ${carType} - Ushbu turdagi mashinalar to'la.`);
-			return { minutes: 0 };
+			console.log(`${this.nameParking} is full by => ${car.constructor.name}s.`);
 		}
 	}
 
-	 logoutCar(): { totalPrice: number } {
-
-	     const carType = this.getCarType(this.cars[0]);
-	     const totalPrice = this.calculateTotalPricePerCar(carType);
-	     this.cars.pop();
-	     return { totalPrice };
-	 }
-
-	 calculateTotalPricePerCar(carType: string) {
-	  const pricePerMinute = this.pricing `${carType}PricePerMinute`;
-	  const totalMinutes = 5;
-	  return pricePerMinute * totalMinutes;
-	}
-
-	calculateTotalProfit() {
-		let totalProfit = 0;
-		this.cars.forEach((car) => {
-			const carType = this.getCarType(car);
-			totalProfit += this.calculateTotalPricePerCar(carType);
-		});
-		return totalProfit;
-	}
-
-	private getCarType(car: T) {
-		if (car instanceof ElectroCar) {
-			return "electroCar";
-		} else if (car instanceof PetrolCar) {
-			return "petrolCar";
-		} else if (car instanceof HybridCar) {
-			return "HybridCar";
+	logoutCar(car: T) {
+		const index = this.cars.indexOf(car);
+		if (index !== -1) {
+			this.cars.splice(index, 1);
+			console.log(`${car.nameCar} logged out from the parking.`);
 		}
-		throw new Error("Avtomobil turi yoq");
 	}
 
-	private canParkCar(carType: string) {
-		return this.cars.length < this.capacity.HybridCar;
+	calculateTotalPricePerCar(car: T) {
+		// const pricePerMinute = this.pricing.electroCarPricePerMinute;
+		// return this.calculateMinutes() * pricePerMinute;
 	}
+
+	calculateTotalProfit() {}
+
+	calculateMinutes() {}
 }
 
-const capacity: Capacity = {
-	electroCar: 4,
-	petrolCar: 12,
-	HybridCar: 3,
-};
+const parking1 = new Parking<ElectroCar>("Sebzor", capacityParking, pricingParking);
+const parking2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
+const parking3 = new Parking<HybridCar>("Chilonzor", capacityParking, pricingParking);
+console.log(parking1);
+console.log(parking2);
+console.log(parking3);
 
-const pricing: Pricing = {
-	electroCarPricePerMinute: 10,
-	petrolCarPricePerMinute: 4,
-	HybridCarPricePerMinute: 20,
-};
-
-const parking = new Parking<Car>("Sebzor", capacity, pricing);
-
-const car1 = new ElectroCar("BYD Sons");
-const car2 = new PetrolCar("Petrol Car 1");
-
-console.log(parking.enterCar(car1));
-console.log(parking.enterCar(car2));
-console.log(parking.calculateTotalProfit());
-console.log(parking.logoutCar());
-console.log(parking.calculateTotalProfit());
+const car1 = new BYD("BYD", 4, "blue", "40000$");
+const car2 = new Spark("Spark", 4, "green", "25000$");
+const car3 = new Zeekr("Zeekr", 4, "black", "35000$");
 
 
+console.log(car1);
+console.log(car2);
+console.log(car3);
 
+console.log("-----------------------MOSHINA KIRISH-----------------------------------------");
+
+parking1.enterCar(car1);
+parking2.enterCar(car2);
+parking3.enterCar(car3);
+
+console.log("-----------------------MOSHINANI ketishi-----------------------------------------");
+
+parking1.logoutCar(car1);
+parking2.logoutCar(car2);
+parking3.logoutCar(car3);
+
+// console.log(`Total profit: $${parking.calculateTotalProfit()}`);
 // // props:   (public)name, (public)sigimi, (public)narxlar
 // // methods:  Methods autokirishi(car: T), autochiqishi(), tolovnaarx(carID: string), jamipul
 
