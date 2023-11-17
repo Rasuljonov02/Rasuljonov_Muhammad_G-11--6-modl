@@ -83,9 +83,9 @@ class Parking<T extends Car> {
 }
 
 
-const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking.electroCarDaqiqadaNarx);
-const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking.hybridCarDaqiqadaNarx);
-const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking.petrolCarDaqiqadaNarx);
+const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
+const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
+const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
 console.log("Rasuljonov Muhammad");
 
 
