@@ -36,6 +36,12 @@ const capacityParking: Capacity = {
 	hybridCar: 3,
 };
 
+const pricingParking: Pricing = {
+	electroCarDaqiqadaNarx: 10,
+	petrolCarDaqiqadaNarx: 4,
+	hybridCarDaqiqadaNarx: 20,
+};
+
 class Parking<T extends Car> {
 	public cars: T[] = [];
 	constructor(public nameParking: string, public capacity: Capacity, public pricing: Pricing) {}
@@ -76,9 +82,9 @@ class Parking<T extends Car> {
 	}
 }
 
-const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
-const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
-const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
+const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking.electroCarDaqiqadaNarx);
+const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking.petrolCarDaqiqadaNarx);
+const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking.hybridCarDaqiqadaNarx);
 
 const car1 = new BYD("BYD");
 const car2 = new Kia("Kia");
@@ -115,6 +121,7 @@ console.log(Kia.name);
 const minutes1 = turarjoy2.daqiqalarniHisoblash();
 const daqiqadaNarx1 = pricingParking.electroCarDaqiqadaNarx;
 const umumiyNarx1 = minutes1 * daqiqadaNarx1;
+
 console.log(`Time: ${minutes1} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx1}$`);
 console.log(`Umumiy narx: ${umumiyNarx1}$`);
@@ -125,6 +132,7 @@ console.log(BMW.name);
 const minutes2 = turarjoy3.daqiqalarniHisoblash();
 const daqiqadaNarx2 = pricingParking.electroCarDaqiqadaNarx;
 const umumiyNarx2 = minutes2 * daqiqadaNarx2;
+
 console.log(`Time: ${minutes2} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx2}$`);
 console.log(`Umumiy narx: ${umumiyNarx2}$`);
