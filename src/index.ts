@@ -5,6 +5,12 @@ class ElectroCar extends Car {}
 class PetrolCar extends Car {}
 class HybridCar extends Car {}
 
+class BYDE2 extends ElectroCar {}
+class Rs extends PetrolCar {}
+class NioEc6 extends HybridCar {}
+
+
+
 interface Capacity {
 	electroCar: number;
 	petrolCar: number;
