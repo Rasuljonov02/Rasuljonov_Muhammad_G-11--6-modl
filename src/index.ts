@@ -45,12 +45,14 @@ const pricingParking: Pricing = {
 	petrolCarPricePerMinute: 4,
 	hybridCarPricePerMinute: 20,
 };
-
+let sum:number;
 class Parking<T extends Car> {
 	public cars: T[] = [];
 	constructor(public nameParking: string, public capacity: Capacity, public pricing: Pricing) {}
 
 	enterCar(car: T) {
+
+
 		if (this.cars.length < this.capacity.electroCar) {
 			this.cars.push(car);
 			console.log(`${car.nameCar} to'xtash joyiga kirdi.`);
