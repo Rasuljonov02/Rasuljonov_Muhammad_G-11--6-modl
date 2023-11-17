@@ -1,12 +1,7 @@
-
-
-
 class Car {
 	constructor(
 		public nameCar: string,
-		public tire: 4, // mashina baloni
-		public color: string,
-		public priceCar: string
+
 	) {}
 
 	run() {
@@ -20,7 +15,8 @@ class HybridCar extends Car {}
 
 class BYD extends ElectroCar {}
 class Kia extends PetrolCar {}
-class Zeekr extends HybridCar {}
+class BMW extends HybridCar {}
+
 
 interface Capacity {
 	electroCar: number;
@@ -29,9 +25,9 @@ interface Capacity {
 }
 
 interface Pricing {
-	electroCarPricePerMinute: number;
-	petrolCarPricePerMinute: number;
-	hybridCarPricePerMinute: number;
+	electroCarDaqiqadaNarx: number;
+	petrolCarDaqiqadaNarx: number;
+	hybridCarDaqiqadaNarx: number;
 }
 
 const capacityParking: Capacity = {
@@ -40,19 +36,11 @@ const capacityParking: Capacity = {
 	hybridCar: 3,
 };
 
-const pricingParking: Pricing = {
-	electroCarPricePerMinute: 10,
-	petrolCarPricePerMinute: 4,
-	hybridCarPricePerMinute: 20,
-};
-let sum:number;
 class Parking<T extends Car> {
 	public cars: T[] = [];
 	constructor(public nameParking: string, public capacity: Capacity, public pricing: Pricing) {}
 
-	enterCar(car: T) {
-
-
+	kirish(car: T) {
 		if (this.cars.length < this.capacity.electroCar) {
 			this.cars.push(car);
 			console.log(`${car.nameCar} to'xtash joyiga kirdi.`);
@@ -61,91 +49,82 @@ class Parking<T extends Car> {
 		}
 	}
 
-	logoutCar(car: T) {
+	chiqish(car: T) {
 		const index = this.cars.indexOf(car);
 		if (index !== -1) {
 			this.cars.splice(index, 1);
-			console.log(`${car.nameCar}to'xtash joyidan chiqdi.`);
+			console.log(`${car.nameCar} to'xtash joyidan chiqdi.`);
 		}
 	}
 
-	calculateTotalPricePerCar(car: T) {
-		// const pricePerMinute = this.pricing.electroCarPricePerMinute;
-		// return this.calculateMinutes() * pricePerMinute;
+	PardagiCar(car: T) {
+		const daqiqadaNarx =
+			car instanceof ElectroCar
+				? this.pricing.electroCarDaqiqadaNarx
+				: car instanceof PetrolCar
+				? this.pricing.petrolCarDaqiqadaNarx
+				: this.pricing.hybridCarDaqiqadaNarx;
+		return this.daqiqalarniHisoblash() * daqiqadaNarx;
 	}
 
-	calculateMinutes() {}
+	daqiqalarniHisoblash() {
+		return Math.floor(Math.random() * 60);
+	}
 
-	calculateTotalProfit() {}
-
+	calculateTotalProfit() {
+		return this.cars.reduce((total, car) => total + this.PardagiCar(car), 0);
+	}
 }
 
-const parking1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
-const parking2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
-const parking3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
-console.log(parking1);
-console.log(parking2);
-console.log(parking3);
+const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
+const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
+const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
 
-console.log("-----------------------MOSHINA-----------------------------------------");
-
-const car1 = new BYD("BYD", 4, "blue", "4$");
-const car2 = new Kia("Kia", 4, "green", "2$");
-const car3 = new Zeekr("Zeekr", 4, "black", "3$");
-
-
-console.log(car1);
-console.log(car2);
-console.log(car3);
+const car1 = new BYD("BYD");
+const car2 = new Kia("Kia");
+const car3 = new BMW("BMW");
 
 console.log("-----------------------MOSHINA KIRISH-----------------------------------------");
 
-parking1.enterCar(car1);
-parking2.enterCar(car2);
-parking3.enterCar(car3);
+turarjoy1.kirish(car1);
+turarjoy2.kirish(car2);
+turarjoy3.kirish(car3);
 
 console.log("-----------------------MOSHINANI ketishi-----------------------------------------");
 
-parking1.logoutCar(car1);
-parking2.logoutCar(car2);
-parking3.logoutCar(car3);
+turarjoy1.chiqish(car1);
+turarjoy2.chiqish(car2);
+turarjoy3.chiqish(car3);
 
+console.log("-----------------------VAQT HISOBASH-----------------------------------------");
 
+const minutes = turarjoy1.daqiqalarniHisoblash();
+const daqiqadaNarx = pricingParking.electroCarDaqiqadaNarx;
+const umumiyNarx = minutes * daqiqadaNarx;
 
+console.log("-----------------------1-moshina-----------------------------------------");
+console.log(BYD.name);
 
-// console.log(`Total profit: $${parking.calculateTotalProfit()}`);
-// // props:   (public)name, (public)sigimi, (public)narxlar
-// // methods:  Methods autokirishi(car: T), autochiqishi(), tolovnaarx(carID: string), jamipul
+console.log(`Time: ${minutes} minutes`);
+console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx}$`);
+console.log(`Umumiy narx: ${umumiyNarx}$`);
 
-// /**
-//  *
-//  * Example :
-//  *
-//  * const avtoturargoh = new Avtoturargoh("Sebzor", sigimi, narxlar)
-//  * const car1 = new BYD("BYD Sons")
-//  * avtoturargoh.autokirishi(car1) // { minutes: 5 }
-//  * avtoturargoh.logout(car1) // { totalPrice: 50 }
-//  *
-//  *
-//  * const sigimi: Sigimi = {
-//  *  electroCar: 4,
-//  *  petrolCar: 12,
-//  *  HybridCar: 3,
-//  * }
-//  *
-//  * narxlar = {
-//  *  electroCarPricePerMinute: 10 ,
-//  *  petrolCarPricePerMinute: 4,
-//  *  HybridCarPricePerMinute: 20,
-//  * }
-//  *
-//  */
+console.log("-----------------------2-moshina-----------------------------------------");
+console.log(Kia.name);
 
-// /**
-//  * Rules:
-//  *  ✅ Internetdan foydalansa boladi
-//  *  ✅ Repo yaratish kerak
-//  *  ✅ UI shart emas
-//  *  ✅ Loyiha TS da bolishi kerak
-//  *
-//  */
+const minutes1 = turarjoy2.daqiqalarniHisoblash();
+const daqiqadaNarx1 = pricingParking.electroCarDaqiqadaNarx;
+const umumiyNarx1 = minutes1 * daqiqadaNarx1;
+console.log(`Time: ${minutes1} minutes`);
+console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx1}$`);
+console.log(`Umumiy narx: ${umumiyNarx1}$`);
+
+console.log("-----------------------3-moshina-----------------------------------------");
+console.log(BMW.name);
+
+const minutes2 = turarjoy3.daqiqalarniHisoblash();
+const daqiqadaNarx2 = pricingParking.electroCarDaqiqadaNarx;
+const umumiyNarx2 = minutes2 * daqiqadaNarx2;
+console.log(`Time: ${minutes2} minutes`);
+console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx2}$`);
+console.log(`Umumiy narx: ${umumiyNarx2}$`);
