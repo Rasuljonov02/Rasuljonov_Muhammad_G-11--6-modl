@@ -1,8 +1,5 @@
 class Car {
-	constructor(
-		public nameCar: string,
-
-	) {}
+	constructor(public nameCar: string) {}
 
 	run() {
 		console.log(`${this.nameCar} is running...`);
@@ -16,7 +13,6 @@ class HybridCar extends Car {}
 class BYD extends ElectroCar {}
 class Kia extends PetrolCar {}
 class BMW extends HybridCar {}
-
 
 interface Capacity {
 	electroCar: number;
@@ -82,12 +78,10 @@ class Parking<T extends Car> {
 	}
 }
 
-
 const turarjoy1 = new Parking<ElectroCar>("Chilonzor", capacityParking, pricingParking);
 const turarjoy2 = new Parking<PetrolCar>("Chorsu", capacityParking, pricingParking);
 const turarjoy3 = new Parking<HybridCar>("Qibray", capacityParking, pricingParking);
 console.log("Rasuljonov Muhammad");
-
 
 const car1 = new BYD("BYD");
 const car2 = new Kia("Kia");
@@ -139,4 +133,3 @@ const umumiyNarx2 = minutes2 * daqiqadaNarx2;
 console.log(`Time: ${minutes2} minutes`);
 console.log(`Bir daqiqa uchun narx: ${daqiqadaNarx2}$`);
 console.log(`Umumiy narx: ${umumiyNarx2}$`);
-
